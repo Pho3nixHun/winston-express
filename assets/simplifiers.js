@@ -70,10 +70,8 @@ module.exports = exports = (function () {
          */
         this.compile = function compile(format, req, res) {
             apiCheck.throw([
-                apiCheck.oneOfType([apiCheck.string, apiCheck.object]),
-                apiCheck.object,
-                apiCheck.object
-            ], arguments)
+                apiCheck.oneOfType([apiCheck.string, apiCheck.object])
+            ], [format]);
             if (!(apiCheck.string(format) instanceof Error)) {
                 if (format in this.formats) format = this.formats[format];
                 else return new Error(`No such format registered ${format}`);
