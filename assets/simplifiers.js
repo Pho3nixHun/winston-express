@@ -128,7 +128,7 @@ module.exports = exports = (function () {
         return {
             raw: token,
             key: String(m[1]).toLowerCase(),
-            args: (m[3] || '').split(',').map((i) => i.trim())
+            args: m[3] ? m[3].split(',').map((i) => i.trim()) : []
         }
     }
     /**
