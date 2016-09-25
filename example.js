@@ -1,6 +1,6 @@
 'use strict';
 
-const express = require('express');
+const app = require('express')();
 const winstonExpress = require('./winston-express')({
   accessLevel: 'verbose',
   accessFileName: 'doodly.log',
@@ -19,7 +19,6 @@ const winstonExpress = require('./winston-express')({
 });
 const logger = winstonExpress.logger;
 
-const app = express();
 app.use(winstonExpress);
 
 app.get('/server-error', function(req, res, next){
