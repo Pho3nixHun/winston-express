@@ -29,6 +29,8 @@
     "api-check": "^7.5.5",
     "basic-auth": "^1.0.4",
     "fs": "0.0.1-security",
+    "on-finished": "^2.3.0",
+    "on-headers": "^1.0.1",
     "path": "^0.12.7",
     "winston": "^2.2.0",
     "xtend": "^4.0.1"

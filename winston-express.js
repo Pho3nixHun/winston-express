@@ -3,6 +3,8 @@ module.exports = exports = (function () {
     "use strict";
     const fs = require('fs');
     const path = require('path');
+    const onFinished = require('on-finished');
+    const onHeaders = require('on-headers');
     const winston = require('winston');
     const extend = require('xtend');
     const Simplifier = require('./assets/simplifiers');
@@ -91,9 +93,24 @@ module.exports = exports = (function () {
         })
 
         var winstonExpressMiddleware = function winstonExpressMiddleware(req, res, next) {
-            let code = statuscodeMap[res.statusCode] || 'error';
-            let details = simplifier.compile(format, req, res);
-            logger[code](details);
+            req._startAt = undefined
+            req._startTime = undefined
+            req._remoteAddress = Simplifier.defaultSimplifiers['remote-addr'](req);
+            res._startAt = undefined
+            res._startTime = undefined
+            // record request start
+            recordStartTime.call(req);
+            onHeaders(res, recordStartTime);
+            onFinished(res, logRequest);
+            function logRequest(){
+                let code = statuscodeMap[res.statusCode] || 'error';
+                let details = simplifier.compile(format, req, res);
+                logger[code](details);
+            }
+            function recordStartTime () {
+                this._startAt = process.hrtime()
+                this._startTime = new Date()
+            }
             next();
         }
         winstonExpressMiddleware.logger = logger;
