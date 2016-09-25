@@ -26,9 +26,14 @@
   },
   "homepage": "https://github.com/Pho3nixHun/winston-express#readme",
   "dependencies": {
+    "api-check": "^7.5.5",
     "basic-auth": "^1.0.4",
     "fs": "0.0.1-security",
     "path": "^0.12.7",
-    "winston": "^2.2.0"
+    "winston": "^2.2.0",
+    "xtend": "^4.0.1"
+  },
+  "devDependencies": {
+    "express": "^4.14.0"
   }
 }
