@@ -1,7 +1,9 @@
 'use strict';
 
 const app = require('express')();
-const winstonExpress = require('./winston-express')({
+const WinstonExpress = require('./winston-express');
+const Simplifier = WinstonExpress.Simplifier;
+const winstonExpress = WinstonExpress({
   accessLevel: 'verbose',
   accessFileName: 'doodly.log',
   errorLevel: 'warn',
@@ -44,6 +46,6 @@ app.get('/', function(req, res, next){
   res.status(200).end('<h3>Here is a cool picture:</h3> <img src=http://source.unsplash.com/random alt="random pic from unsplash" />');
 })
 
-app.listen(8000, ()=>{
-  console.log('Listening on port 8000')
+app.listen(process.env.PORT || 8000, ()=>{
+  console.log('Listening on port', process.env.PORT || 8000)
 })

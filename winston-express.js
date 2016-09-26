@@ -7,7 +7,7 @@ module.exports = exports = (function () {
     const onHeaders = require('on-headers');
     const winston = require('winston');
     const extend = require('xtend');
-    const Simplifier = require('./assets/simplifiers');
+    const Simplifier = winstonExpress.Simplifier = require('./assets/simplifiers');
     const statuscodeMap = require('./assets/httpStatuscodeMap.json');
     const apiCheck = require('api-check')();
     let defaults = winstonExpress.defaults = {
@@ -113,7 +113,14 @@ module.exports = exports = (function () {
             }
             next();
         }
+        /**
+         * Winston instance which is being used for logging.
+         */
         winstonExpressMiddleware.logger = logger;
+        /**
+         * Simplifier instance which is being used for logging.
+         */
+        winstonExpressMiddleware.simplifier = simplifier;
 
         return winstonExpressMiddleware;
     }
