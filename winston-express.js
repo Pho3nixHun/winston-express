@@ -71,7 +71,7 @@ module.exports = exports = (function () {
             new (winston.transports.File)({
                 name: 'error',
                 level: 'error',
-                filename: './logs/error.log',
+                filename: path.join(_o.logFolder, _o.errorFileName),
                 handleExceptions: true,
                 json: true,
                 maxsize: 5242880, //5MB
